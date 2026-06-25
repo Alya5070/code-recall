@@ -375,6 +375,14 @@ function jumpToReviewQuestion(index) {
             }
         }
     }
+    
+    // Close mobile sidebar if open
+    const sidebar = document.querySelector('.sidebar');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    if (sidebar && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        mobileOverlay.classList.remove('active');
+    }
 }
 
 // Initialize when ready

@@ -320,7 +320,18 @@ function buildCodeLayout() {
     });
 
     if (flatChars.length > 0) {
-        flatChars[0].element.classList.add('cursor-active');
+        let firstItem = flatChars[0];
+        while (firstItem && (firstItem.char === ' ' || firstItem.char === '\n')) {
+            firstItem.element.classList.add('correct');
+            activeCharIndex++;
+            if (activeCharIndex >= flatChars.length) break;
+            firstItem = flatChars[activeCharIndex];
+        }
+        if (activeCharIndex < flatChars.length) {
+            flatChars[activeCharIndex].element.classList.add('cursor-active');
+        } else {
+            finishSession();
+        }
     }
 }
 
@@ -437,45 +448,24 @@ function advanceCursor() {
     }
 
     // Set new cursor
-    const nextItem = flatChars[activeCharIndex];
+    let nextItem = flatChars[activeCharIndex];
+    
+    // Auto-skip logic: automatically skip ANY space or newline
+    while (nextItem && (nextItem.char === ' ' || nextItem.char === '\n')) {
+        nextItem.element.classList.add('correct');
+        activeCharIndex++;
+        
+        if (activeCharIndex >= flatChars.length) {
+            finishSession();
+            return;
+        }
+        nextItem = flatChars[activeCharIndex];
+    }
+
     nextItem.element.classList.add('cursor-active');
     
     // Auto-scroll terminal body if cursor goes out of view
     nextItem.element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-    // AUTO-INDENT SKIPPER:
-    // If the next character is a space, and it is part of a leading indentation block, auto-skip it.
-    skipLeadingSpaces();
-}
-
-// Skip leading indentation spaces automatically on new line
-function skipLeadingSpaces() {
-    if (activeCharIndex >= flatChars.length) return;
-
-    let currentItem = flatChars[activeCharIndex];
-    
-    // If we just landed on a space at the start of a line
-    if (currentItem.char === ' ' && (activeCharIndex === 0 || flatChars[activeCharIndex - 1].char === '\n')) {
-        
-        // Remove the cursor from the initial space before skipping
-        currentItem.element.classList.remove('cursor-active');
-
-        while (currentItem && currentItem.char === ' ' && !currentItem.isNewline) {
-            currentItem.element.classList.add('correct');
-            activeCharIndex++;
-            if (activeCharIndex >= flatChars.length) {
-                finishSession();
-                return;
-            }
-            currentItem = flatChars[activeCharIndex];
-        }
-        
-        // Set cursor on the first non-space character
-        if (currentItem) {
-            currentItem.element.classList.add('cursor-active');
-            currentItem.element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-    }
 }
 
 // Undo last typed character
@@ -611,6 +601,23 @@ function setupEventListeners() {
         revealCurrentLine();
         keyboardGate.focus();
     });
+
+    // Mobile Sidebar Toggle
+    const btnMobileMenu = document.getElementById('btn-mobile-menu');
+    const sidebar = document.querySelector('.sidebar');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    if (btnMobileMenu && sidebar && mobileOverlay) {
+        btnMobileMenu.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            mobileOverlay.classList.add('active');
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            mobileOverlay.classList.remove('active');
+        });
+    }
 
     // Hold Shift to peek / Alt+F to toggle focus / Alt+T to toggle theme
     window.addEventListener('keydown', (e) => {

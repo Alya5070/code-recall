@@ -15,6 +15,8 @@
 
 <body>
     <div class="app-container">
+        <!-- Mobile Sidebar Overlay -->
+        <div id="mobile-overlay" class="mobile-overlay"></div>
         <!-- Sidebar for library management -->
         <aside class="sidebar">
             <div class="sidebar-header">
@@ -57,9 +59,18 @@
         <main class="main-content">
             <!-- Header with Title, Mode Selector, and Stats -->
             <header class="workspace-header">
-                <div class="snippet-meta">
-                    <h1 id="active-title">Loading...</h1>
-                    <span id="active-lang" class="badge">python</span>
+                <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+                    <button id="btn-mobile-menu" class="btn-secondary mobile-only" title="Toggle Menu" style="display: none; padding: 0.5rem;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="snippet-meta">
+                        <h1 id="active-title">Loading...</h1>
+                        <span id="active-lang" class="badge">python</span>
+                    </div>
                 </div>
 
                 <div class="workspace-controls">
