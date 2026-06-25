@@ -49,13 +49,6 @@ const INITIAL_SNIPPETS = [
         "code": "def power_2n(a, n):\n    \"\"\"\n    Returns a^(2n) for n >= 0.\n    \"\"\"\n    if n == 0:\n        return 1\n    # Compute a^n using fast exponentiation\n    def power(a, n):\n        if n == 0:\n            return 1\n        half = power(a, n//2)\n        if n % 2 == 0:\n            return half * half\n        else:\n            return half * half * a\n    an = power(a, n)\n    return an * an"
     },
     {
-        "id": "graph-theory-8",
-        "title": "Graph Theory",
-        "lang": "python",
-        "filename": "graph-theory.py",
-        "code": "A  B  C  D  E  F  G\nA  0  8 10 \u221e \u221e \u221e \u221e\nB  8  0 \u221e 12 11 \u221e \u221e\nC 10 \u221e  0 \u221e \u221e  4  7\nD \u221e 12 \u221e  0 19  5 \u221e\nE \u221e 11 \u221e 19  0 \u221e  9\nF \u221e \u221e  4  5 \u221e  0 \u221e\nG \u221e \u221e  7 \u221e  9 \u221e  0"
-    },
-    {
         "id": "bubble-sort-9",
         "title": "Bubble Sort",
         "lang": "python",
@@ -84,13 +77,6 @@ const INITIAL_SNIPPETS = [
         "code": "def power(a, n):\n    if n == 0:\n        return 1\n    if n == 1:\n        return a\n    half = power(a, n//2)\n    if n % 2 == 0:\n        return half * half\n    else:\n        return half * half * a"
     },
     {
-        "id": "graph-theory-15",
-        "title": "Graph Theory",
-        "lang": "python",
-        "filename": "graph-theory.py",
-        "code": "A  B  C  D  E  F  G\nA  0  4  8  \u221e  \u221e  \u221e  \u221e\nB  4  0  \u221e  7  \u221e  \u221e  \u221e\nC  8  \u221e  0 10  \u221e  \u221e  \u221e\nD  \u221e  7 10  0 12 17  \u221e\nE  \u221e  \u221e  \u221e 12  0  9  6\nF  \u221e  \u221e  \u221e 17  9  0  9\nG  \u221e  \u221e  \u221e  \u221e  6  9  0"
-    },
-    {
         "id": "quick-sort-21",
         "title": "Quick Sort",
         "lang": "python",
@@ -103,12 +89,5 @@ const INITIAL_SNIPPETS = [
         "lang": "python",
         "filename": "recursive-algorithms.py",
         "code": "def fib(n):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fib(n-1) + fib(n-2)"
-    },
-    {
-        "id": "graph-theory-23",
-        "title": "Graph Theory",
-        "lang": "python",
-        "filename": "graph-theory.py",
-        "code": "A  B  C  D  E  F\nA  0  1  2  \u221e  \u221e  \u221e\nB  1  0  \u221e  3  \u221e  \u221e\nC  2  \u221e  0  4  5  \u221e\nD  \u221e  3  4  0  \u221e  6\nE  \u221e  \u221e  5  \u221e  0  7\nF  \u221e  \u221e  \u221e  6  7  0"
     }
 ];
