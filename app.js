@@ -393,8 +393,8 @@ function processKeyInput(typedChar, isEnterKey = false) {
     let isCorrect = false;
     
     if (targetItem.isNewline) {
-        // Must press Enter key for newline
-        isCorrect = (typedChar === '\n' || isEnterKey);
+        // Must press Enter key or Space for newline
+        isCorrect = (typedChar === '\n' || isEnterKey || typedChar === ' ');
     } else {
         isCorrect = (typedChar === targetItem.char);
     }
